@@ -13,7 +13,12 @@ namespace SeleniumDemoQA.Tests
         [SetUp]
         public void Setup()
         {
-            _driver = new ChromeDriver();
+            var options = new ChromeOptions();
+
+            // Set the window size
+            options.AddArgument("window-size=1400,1200"); // Set your desired resolution here
+
+            _driver = new ChromeDriver(options);
             _driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
             _driver.Navigate().GoToUrl("https://demoqa.com/buttons");
         }
@@ -22,12 +27,12 @@ namespace SeleniumDemoQA.Tests
         public void DoubleClickButtonTest()
         {
             var doubleClickButton = _driver.FindElement(By.Id("doubleClickBtn"));
-            Actions actions = new Actions(_driver);
+            var actions = new Actions(_driver);
             actions.DoubleClick(doubleClickButton).Perform();
 
             var doubleClickMessage = _driver.FindElement(By.Id("doubleClickMessage"));
             Assert.IsTrue(doubleClickMessage.Displayed);
-            Assert.AreEqual("You have done a double click", doubleClickMessage.Text);
+            Assert.That(doubleClickMessage.Text, Is.EqualTo("You have done a double click"));
         }
 
         [Test]
@@ -39,7 +44,7 @@ namespace SeleniumDemoQA.Tests
 
             var rightClickMessage = _driver.FindElement(By.Id("rightClickMessage"));
             Assert.IsTrue(rightClickMessage.Displayed);
-            Assert.AreEqual("You have done a right click", rightClickMessage.Text);
+            Assert.That(rightClickMessage.Text, Is.EqualTo("You have done a right click"));
         }
 
         [Test]
@@ -50,7 +55,7 @@ namespace SeleniumDemoQA.Tests
 
             var dynamicClickMessage = _driver.FindElement(By.Id("dynamicClickMessage"));
             Assert.IsTrue(dynamicClickMessage.Displayed);
-            Assert.AreEqual("You have done a dynamic click", dynamicClickMessage.Text);
+            Assert.That(dynamicClickMessage.Text, Is.EqualTo("You have done a dynamic click"));
         }
 
         [TearDown]
