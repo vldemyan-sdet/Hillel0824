@@ -8,7 +8,7 @@ namespace SeleniumDemoQA.Tests
 {
     public class ButtonTests
     {
-        private IWebDriver _driver;
+        private ChromeDriver _driver;
 
         [SetUp]
         public void Setup()
@@ -38,7 +38,7 @@ namespace SeleniumDemoQA.Tests
         [Test]
         public void RightClickButtonTest()
         {
-            var rightClickButton = _driver.FindElement(By.Id("rightClickBtn"));
+            var rightClickButton = _driver.FindElement(By.XPath("//button[text()='Right Click Me']"));
             Actions actions = new Actions(_driver);
             actions.ContextClick(rightClickButton).Perform();
 
