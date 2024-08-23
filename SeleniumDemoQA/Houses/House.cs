@@ -11,7 +11,6 @@ namespace Houses
     {
         public House() { }
         public int floorsNumber;
-        // area of entire building
         public int area;
     }
 }
