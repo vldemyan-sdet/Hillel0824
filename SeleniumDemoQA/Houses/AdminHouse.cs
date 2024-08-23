@@ -11,6 +11,7 @@ namespace Houses
         public int numberOfWorkRoom;
         public void ElevatorToFloor(int floor) { }
         public void CallSupportToWorkRoom(int workRoomNumber) { }
+        public void CallSupportToWorkFloor(int floorNumber) { }
 
     }
 }

@@ -11,6 +11,7 @@ namespace Houses
     {
         public House() { }
         public int floorsNumber;
+        public int area;
     }
 }
 
