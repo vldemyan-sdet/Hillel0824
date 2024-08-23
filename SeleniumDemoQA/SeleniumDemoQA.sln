@@ -5,7 +5,7 @@ VisualStudioVersion = 17.8.34525.116
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SeleniumDemoQA", "SeleniumDemoQA\SeleniumDemoQA.csproj", "{D9B42D8F-1ABB-47C4-9DB1-FD9F1B30B06F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpBasics", "CSharpBasics\CSharpBasics.csproj", "{4D86D02A-35AF-401B-9B62-DFD0DA100D5B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CSharpBasics", "CSharpBasics\CSharpBasics.csproj", "{4D86D02A-35AF-401B-9B62-DFD0DA100D5B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

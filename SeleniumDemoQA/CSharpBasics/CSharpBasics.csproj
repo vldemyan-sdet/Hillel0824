@@ -17,4 +17,10 @@
     <PackageReference Include="coverlet.collector" Version="6.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="Houses">
+      <HintPath>..\..\Houses\bin\Debug\net8.0\Houses.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>
