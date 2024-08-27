@@ -2,6 +2,19 @@ namespace CSharpBasics
 {
     internal class CarTests
     {
+        private string Test1(string name)
+        {
+            return "My name: " + name;
+        }
+        private int? getSt()
+        {
+            if (0 == 0)
+            {
+                return null;
+            }
+            return 10;
+        }
+
         [SetUp]
         public void Setup()
         {
@@ -10,6 +23,11 @@ namespace CSharpBasics
         [Test]
         public void Should_AddTwoNumbers_Correctly()
         {
+            var name = "Volodymyr";
+            Test1(name);
+            var st = getSt();
+            
+
             // Variables
             int number1 = 5;
             int number2 = 10;

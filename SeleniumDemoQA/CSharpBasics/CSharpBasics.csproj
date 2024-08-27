@@ -18,9 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="Houses">
-      <HintPath>..\..\Houses\bin\Debug\net8.0\Houses.dll</HintPath>
-    </Reference>
+    <ProjectReference Include="..\Houses\Houses.csproj" />
   </ItemGroup>
 
 </Project>
