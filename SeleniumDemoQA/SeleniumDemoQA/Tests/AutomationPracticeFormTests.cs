@@ -13,7 +13,9 @@ namespace SeleniumDemoQA.Tests
             var formPage = new FormPage(_driver);
             
 
-            formPage.FillInput(By.Id("firstName"), "John");
+            //formPage.FillInput(By.Id("firstName"), "John");
+            formPage.FillFirstName("John");
+
             formPage.FillInput(By.Id("lastName"), "Doe");
             formPage.FillInput(By.Id("userEmail"), "johndoe@example.com");
             formPage.ClickElement(By.CssSelector("label[for='gender-radio-1']"));
@@ -21,7 +23,7 @@ namespace SeleniumDemoQA.Tests
             formPage.ClickElement(By.Id("dateOfBirthInput"));
             formPage.SelectByText(By.ClassName("react-datepicker__month-select"), "May");
             formPage.SelectByText(By.ClassName("react-datepicker__year-select"), "1990");
-            formPage.ClickElement(By.CssSelector(".react-datepicker__day--015:not(.react-datepicker__day--outside-month)"));
+            formPage.ClickElement(By.CssSelector($".react-datepicker__day--015:not(.react-datepicker__day--outside-month)"));
             formPage.FillInput(By.Id("subjectsInput"), "Maths");
             formPage.GetElementBy(By.Id("subjectsInput")).SendKeys(Keys.Enter);
             formPage.ClickElement(By.CssSelector("label[for='hobbies-checkbox-1']"));
@@ -32,10 +34,14 @@ namespace SeleniumDemoQA.Tests
             formPage.ClickElement(By.XPath("//div[text()='Delhi']"));
             formPage.ClickElement(By.Id("submit"));
 
-            var confirmationModal = formPage.GetElementBy(By.Id("example-modal-sizes-title-lg"));
+            //var confirmationModal = formPage.GetElementBy(By.Id("example-modal-sizes-title-lg"));
+            var isConfirmationModalDisplayed = formPage.IsConfirmationModalDisplayed();
+            var confirmationModalText = formPage.GetConfirmationModalText();
 
-            Assert.IsTrue(confirmationModal.Displayed);
-            Assert.That(confirmationModal.Text, Is.EqualTo("Thanks for submitting the form"));
+            //Assert.IsTrue(confirmationModal.Displayed);
+            Assert.IsTrue(isConfirmationModalDisplayed);
+            //Assert.That(confirmationModal.Text, Is.EqualTo("Thanks for submitting the form"));
+            Assert.That(confirmationModalText, Is.EqualTo("Thanks for submitting the form"));
         }
 
 

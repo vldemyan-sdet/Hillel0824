@@ -8,6 +8,8 @@ namespace SeleniumDemoQA.Pages
         public IWebDriver _driver;
         public IJavaScriptExecutor _js;
 
+        By confirmationModalElement = By.Id("example-modal-sizes-title-lg");
+
         public FormPage(IWebDriver driver) 
         {
             _driver = driver;
@@ -48,6 +50,21 @@ namespace SeleniumDemoQA.Pages
         public IWebElement GetElementBy(By selector)
         {
             return _driver.FindElement(selector);
+        }
+
+        public void FillFirstName(string firstName)
+        {
+            FillInput(By.Id("firstName"), firstName);
+        }
+
+        internal bool IsConfirmationModalDisplayed()
+        {
+            return _driver.FindElement(confirmationModalElement).Displayed;
+        }
+
+        internal string GetConfirmationModalText()
+        {
+            return _driver.FindElement(confirmationModalElement).Text;
         }
     }
 }
