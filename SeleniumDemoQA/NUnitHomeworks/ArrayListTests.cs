@@ -1,6 +1,6 @@
 namespace CSharpBasics
 {
-    internal class Collections
+    internal class ArrayListTests
     {
         [SetUp]
         public void Setup()
