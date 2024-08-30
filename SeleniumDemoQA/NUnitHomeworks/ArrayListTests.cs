@@ -60,7 +60,7 @@ namespace CSharpBasics
 
             // Verify the content of the list
             Assert.That(numbers[0], Is.EqualTo(1));
-            Assert.That(numbers[4], Is.EqualTo(5));
+            Assert.That(numbers.ElementAt(4), Is.EqualTo(5));
         }
 
         [Test]
@@ -109,6 +109,49 @@ namespace CSharpBasics
             // Verify the list contains certain elements
             Assert.That(students.Contains("Jane"), Is.True);
             Assert.That(students.Contains("Sue"), Is.False);
+        }
+
+        [Test]
+        public void Foreach()
+        {
+            int[] numbers = new int[5] { 1, 2, 3, 4, 5 };
+
+            for (int i = 0; i < numbers.Length; i = i + 1)
+            {
+                Console.WriteLine(numbers[i]);
+            }
+
+            foreach (int number in numbers)
+            {
+                Console.WriteLine(number);
+            }
+
+            List<string> students = new() { "John", "Jane", "Bill" };
+            List<decimal> salaries1 = new();
+            List<decimal> salaries2 = new();
+            salaries1.Add(100.58m);
+            salaries1.Add(287.68m);
+            salaries1.Add(310.13m);
+
+            foreach (int number in numbers)
+            {
+                Assert.That(number, Is.GreaterThan(0));
+            }
+
+            foreach (var student in students)
+            {
+                Assert.That(student.Length, Is.GreaterThan(0));
+            }
+
+            foreach (var salary in salaries1)
+            {
+                Assert.That(salary, Is.GreaterThan(0));
+            }
+
+            foreach (var salary in salaries2)
+            {
+                Assert.That(salary, Is.GreaterThan(0));
+            }
         }
     }
 

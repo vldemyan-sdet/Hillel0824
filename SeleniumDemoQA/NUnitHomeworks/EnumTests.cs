@@ -100,7 +100,6 @@
         [TestCase(Status.InProgress)]
         public void TestEnumComparison2(Status status)
         {
-            Assert.That(status == Status.Pending, Is.True);
             Assert.That(status, Is.EqualTo(Status.Pending));
         }
 
@@ -121,7 +120,7 @@
         public static object[] EnumSource =
         {
             new object[] { Status.Failed, "Error" },
-            new object[] { Status.InProgress, "In Progress" },
+            new object[] { Status.InProgress, "Inprogress" },
             new object[] { Status.Completed, "Completed" }
         };
 
@@ -194,7 +193,7 @@
             {
                 Assert.That(access.HasFlag(FileAccess.Read), Is.True);
                 Assert.That(access.HasFlag(FileAccess.Execute), Is.False);
-                Assert.That(access.HasFlag(FileAccess.Execute), Is.True);
+                Assert.That(access.HasFlag(FileAccess.Write), Is.True);
             });
         }
     }
