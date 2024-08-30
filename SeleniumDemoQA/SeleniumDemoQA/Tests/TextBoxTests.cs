@@ -1,44 +1,35 @@
 ﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Support.UI;
 using SeleniumDemoQA.Pages;
 
 namespace SeleniumDemoQA.Tests
 {
     public class TextBoxTests : BaseClass
     {
+        By fullNameBy = By.Id("userName");
+        By emailBy = By.Id("userEmail");
+        By currentAddressBy = By.Id("currentAddress");
+        By permanentAddressBy = By.Id("permanentAddress");
+        By nameOutputBy = By.Id("name");
+        By emailOutputBy = By.Id("email");
+        By currentOutputAddressBy = By.CssSelector("#output  #currentAddress");
+        By permanentOutputAddressBy = By.CssSelector("#output  #permanentAddress");
+
         [Test]
-        public void FillAndSubmitTheTextBox()
+        public void FillFormTest()
         {
-            _driver.Navigate().GoToUrl("https://demoqa.com/text-box");
-
             var formPage = new FormPage(_driver);
+            formPage.NavigateTo("https://demoqa.com/text-box");
 
-            var name = "Sasha B";
-            var email = "Sasha@gmail.com";
-            var currentAddress = "MyStreet, 100, MyCity, MyCountry, 123456";
-            var permanentAddress = "Vesnyana Street, 10, Kyiv, Ukraine, 29004";
+            formPage.FindElement(fullNameBy).SendKeys("John Doe");
+            formPage.FindElement(emailBy).SendKeys("john.doe@example.com");
+            formPage.FindElement(currentAddressBy).SendKeys("123 Main St, Anytown, USA");
+            formPage.FindElement(permanentAddressBy).SendKeys("456 Another St, Othertown, USA");
+            formPage.SubmitForm();
 
-            formPage.FillInput(By.Id("userName"), name);
-            formPage.FillInput(By.Id("userEmail"), email);
-            formPage.FillInput(By.Id("currentAddress"), currentAddress);
-            formPage.FillInput(By.Id("permanentAddress"), permanentAddress);
-
-            // Scroll to Submit button and click it
-            formPage.ClickElement(By.Id("submit"));
-
-            // Assert that the submitted values are displayed correctly in the output form
-            var nameResult = formPage.GetElementBy(By.Id("name"));
-            var emailResult = formPage.GetElementBy(By.Id("email"));
-            var currentAddressResult = formPage.GetElementBy(By.CssSelector("#output #currentAddress.mb-1"));
-            var permanentAddressResult = formPage.GetElementBy(By.CssSelector("#output #permanentAddress.mb-1"));
-
-            //The formatting of the output below is not quite right, in particular with the spaces, but leaving as is to pass the test
-            Assert.That(nameResult.Text, Is.EqualTo("Name:" + name));
-            Assert.That(emailResult.Text, Is.EqualTo("Email:" + email));
-            Assert.That(currentAddressResult.Text, Is.EqualTo("Current Address :" + currentAddress));
-            Assert.That(permanentAddressResult.Text, Is.EqualTo("Permananet Address :" + permanentAddress));
+            Assert.That(formPage.FindElement(nameOutputBy).Text, Is.EqualTo("Name:John Doe"));
+            Assert.That(formPage.FindElement(emailOutputBy).Text, Is.EqualTo("Email:john.doe@example.com"));
+            Assert.That(formPage.FindElement(currentOutputAddressBy).Text, Is.EqualTo("Current Address :123 Main St, Anytown, USA"));
+            Assert.That(formPage.FindElement(permanentOutputAddressBy).Text, Is.EqualTo("Permananet Address :456 Another St, Othertown, USA"));
         }
-
     }
 }

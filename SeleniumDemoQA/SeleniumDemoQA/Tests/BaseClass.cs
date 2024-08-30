@@ -1,11 +1,13 @@
-﻿using OpenQA.Selenium.Support.UI;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 
 namespace SeleniumDemoQA.Tests
 {
     public class BaseClass
     {
+        public IWebDriver _driver;
+        public IJavaScriptExecutor _js;
+
         [SetUp]
         public void Setup()
         {
@@ -21,11 +23,5 @@ namespace SeleniumDemoQA.Tests
         {
             _driver.Quit();
         }
-
-        public IWebDriver _driver;
-        public IJavaScriptExecutor _js;
-
-
-
     }
 }
