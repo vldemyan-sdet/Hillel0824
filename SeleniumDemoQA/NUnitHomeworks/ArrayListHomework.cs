@@ -78,7 +78,6 @@ namespace CSharpBasics
             // Arrange
             List<int> numbers = new List<int> { 1, 2, 3, 4, 5 };
             List<int> expectedList = new List<int> { 1, 3, 5 };
-            // TODO: Create an instance of your class and call the method to remove even numbers
 
             // Act
             // Implement code to remove extra items
