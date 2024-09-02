@@ -1,14 +1,11 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
+using SeleniumDemoQA.Models;
 
 namespace SeleniumDemoQA.Pages
 {
-    internal class FormPage
-
+    internal class FormPage : BasePage
     {
-        public IWebDriver _driver;
-        public IJavaScriptExecutor _js;
-
         private By firstNameInputBy = By.Id("firstName");
         private By lastNameInputBy = By.Id("lastName");
         private By emailInputBy = By.Id("userEmail");
@@ -24,46 +21,8 @@ namespace SeleniumDemoQA.Pages
         private By confirmationModalBy = By.Id("example-modal-sizes-title-lg");
 
 
-        public FormPage(IWebDriver driver)
+        public FormPage(IWebDriver driver) : base(driver)
         {
-            _driver = driver;
-            _js = (IJavaScriptExecutor)_driver;
-        }
-
-        public void NavigateTo(string link)
-        {
-            _driver.Navigate().GoToUrl(link);
-        }
-
-        public void ScrollTo(IWebElement element)
-        {
-            _js.ExecuteScript("arguments[0].scrollIntoView(true);", element);
-        }
-
-        public void FillInput(By selector, string value)
-        {
-            IWebElement element = FindElement(selector);
-            ScrollTo(element);
-            element.SendKeys(value);
-        }
-
-        public void ClickElement(By selector)
-        {
-            IWebElement element = FindElement(selector);
-            ScrollTo(element);
-            element.Click();
-        }
-
-        public void SelectDefinedElement(By selector, string value)
-        {
-            var elements = new SelectElement(FindElement(selector));
-            elements.SelectByText(value);
-        }
-
-        public IWebElement FindElement(By by)
-        {
-            IWebElement element = _driver.FindElement(by);
-            return element;
         }
 
         public void FillFirstName(string firstName)
@@ -97,22 +56,21 @@ namespace SeleniumDemoQA.Pages
             FillInput(currentAddressInputBy, currentAddress);
         }
 
-        public void SelectGender(string gender)
+        public void SelectGender(Gender gender)
         {
             switch (gender)
             {
-                case "Male":
+                case Gender.Male:
                     _driver.FindElement(By.CssSelector("label[for='gender-radio-1']")).Click();
                     break;
-                case "Female":
+                case Gender.Female:
                     _driver.FindElement(By.CssSelector("label[for='gender-radio-2']")).Click();
                     break;
-                case "Other":
+                case Gender.Other:
                     _driver.FindElement(By.CssSelector("label[for='gender-radio-3']")).Click();
                     break;
                 default:
-                    Console.WriteLine($"The gender option '{gender}' is not recognized.");
-                    break;
+                    throw new Exception($"The gender option '{gender}' is not recognized.");
             }
         }
 

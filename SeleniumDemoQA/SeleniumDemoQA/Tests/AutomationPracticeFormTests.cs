@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using SeleniumDemoQA.Models;
 using SeleniumDemoQA.Pages;
 
 namespace SeleniumDemoQA.Tests
@@ -15,7 +16,7 @@ namespace SeleniumDemoQA.Tests
             formPage.FillFirstName("John");
             formPage.FillLastName("Doe");
             formPage.FillEmail("johndoe@example.com");
-            formPage.SelectGender("Male");
+            formPage.SelectGender(Gender.Male);
             formPage.FillMobileNumber("1234567890");
             formPage.SelectDateOfBirth("May", "1990", "15");
             formPage.FillSubject("Maths");
