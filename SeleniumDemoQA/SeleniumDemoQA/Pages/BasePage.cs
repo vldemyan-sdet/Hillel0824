@@ -22,6 +22,7 @@ namespace SeleniumDemoQA.Pages
         public void ScrollTo(IWebElement element)
         {
             _js.ExecuteScript("arguments[0].scrollIntoView(true);", element);
+            //_js.ExecuteScript("arguments[0].scrollIntoView(false);", element);
         }
 
         public void FillInput(By selector, string value)
@@ -48,6 +49,18 @@ namespace SeleniumDemoQA.Pages
         {
             IWebElement element = _driver.FindElement(by);
             return element;
+        }
+        
+        public void WaitForElementVisible(By by)
+        {
+            WebDriverWait wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(3));
+            wait.Until(d => d.FindElement(by).Displayed);
+        }
+                
+        public void WaitForElementEnabled(By by)
+        {
+            WebDriverWait wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(3));
+            wait.Until(d => d.FindElement(by).Displayed && d.FindElement(by).Enabled);
         }
 
     }

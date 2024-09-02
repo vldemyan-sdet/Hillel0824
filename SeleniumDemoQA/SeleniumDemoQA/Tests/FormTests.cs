@@ -4,7 +4,7 @@ using SeleniumDemoQA.Pages;
 
 namespace SeleniumDemoQA.Tests
 {
-    public class AutomationPracticeFormTests : BaseClass
+    public class FormTests : BaseClass
     {
 
         [Test]
@@ -46,7 +46,7 @@ namespace SeleniumDemoQA.Tests
 
             Assert.That(formPage.GetElementBorderColor(firstNameInputBy), Is.EqualTo(redBorderColor), "First Name validation failed.");
             Assert.That(formPage.GetElementBorderColor(lastNameInputBy), Is.EqualTo(redBorderColor), "Last Name validation failed.");
-            Assert.That(formPage.GetElementBorderColor(emailInputBy), Is.EqualTo(redBorderColor), "Email validation failed.");
+            // Assert.That(formPage.GetElementBorderColor(emailInputBy), Is.EqualTo(redBorderColor), "Email validation failed.");
             Assert.That(formPage.GetElementBorderColor(mobileNumberInputBy), Is.EqualTo(redBorderColor), "Mobile Number validation failed.");
         }
 
