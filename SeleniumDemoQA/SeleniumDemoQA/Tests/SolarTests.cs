@@ -19,10 +19,10 @@ namespace SeleniumDemoQA.Tests
             // Act
             var firstProductTextBefore = solarPage.GetFirstProductTitleText();
             solarPage.CheckBrand("JA Solar");
-            //Thread.Sleep(3000);
             var firstProductTextAfter = solarPage.GetFirstProductTitleText();
 
             // Assert
+            //MyAssert.NotEqual(firstProductTextAfter, firstProductTextBefore);
             Assert.That(firstProductTextAfter, Is.Not.EqualTo(firstProductTextBefore));
         }
 

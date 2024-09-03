@@ -18,29 +18,34 @@ namespace SeleniumDemoQA.Pages
         public void Open()
         {
             NavigateTo("https://solartechnology.com.ua/shop");
+
+            WaitForLoader();
+        }
+        
+        public void WaitForLoader()
+        {
+            WaitForElementVisible(loader);
+            WaitForElementInvisible(loader);
         }
 
         public void OpenSolarPanels()
         {
-            //Thread.Sleep(3000);
-            //var timeStart = DateTime.Now;
-            //WaitForElementVisible(solarPanelsLink);
-            //var timeEnd = DateTime.Now;
-            //Console.WriteLine(timeEnd - timeStart);
-            ClickElement(solarPanelsLink);
+            WaitAndClickElement(solarPanelsLink);
+
+            WaitForLoader();
         }
         
         public void OpenFilters()
         {
-            //Thread.Sleep(3000);
-            //WaitForElementVisible(filterButton);
-            ClickElement(filterButton);
+            WaitAndClickElement(filterButton);
         }
                 
         public void CheckBrand(string brand)
         {
-            //Thread.Sleep(3000);
-            ClickElement(By.XPath($"//*[@id='checkbox-brand']/following-sibling::span[text()='{brand}']"));
+            var brandCheckbox = By.XPath($"//*[@id='checkbox-brand']/following-sibling::span[text()='{brand}']");
+            WaitAndClickElement(brandCheckbox);
+
+            WaitForLoader();
         }
                         
         public string GetFirstProductTitleText()
