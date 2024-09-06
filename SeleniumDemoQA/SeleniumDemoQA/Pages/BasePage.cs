@@ -53,11 +53,11 @@ namespace SeleniumDemoQA.Pages
             ScrollTo(element);
             element.Click();
         }
-        
-        public void WaitAndClickElement(By selector)
+
+        public void WaitAndClickElement(By selector, int seconds = 3)
         {
             var timeStart = DateTime.Now;
-            WaitForElementVisible(selector);
+            WaitForElementVisible(selector, seconds);
             var timeEnd = DateTime.Now;
             Console.WriteLine(timeEnd - timeStart);
 
@@ -77,19 +77,29 @@ namespace SeleniumDemoQA.Pages
             IWebElement element = _driver.FindElement(by);
             return element;
         }
-        
+
         public void WaitForElementVisible(By by, int sec = 3)
         {
-            WebDriverWait wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(sec));
-            wait.Until(d => d.FindElement(by).Displayed);
+            var timeStart = DateTime.Now;
+            try
+            {
+                WebDriverWait wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(sec));
+                wait.Until(d => d.FindElement(by).Displayed);
+            }
+            catch
+            {
+                var timeEnd = DateTime.Now;
+                Console.WriteLine(timeEnd - timeStart);
+                throw;
+            }
         }
-                 
+
         public void WaitForElementInvisible(By by)
         {
             WebDriverWait wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(3));
             wait.Until(d => !d.FindElement(by).Displayed);
         }
-                
+
         public void WaitForElementEnabled(By by)
         {
             WebDriverWait wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(3));

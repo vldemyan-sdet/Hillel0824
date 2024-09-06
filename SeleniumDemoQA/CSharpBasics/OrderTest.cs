@@ -2,26 +2,51 @@
 
 namespace CSharpBasics
 {
+    public class Product
+    {
+        public int Id { get; set; }
+        public Product(int productId)
+        {
+            Id = productId;
+        }
+    }
     public class Order
     {
-        private int _orderNumber;
+
+        public int OrderNumber { get; set; }
+
+        private List<Product> _products;
+        private DateTime _orderDate;
+        private string _orderDescription;
 
         public Order(int orderNumber)
         {
-            _orderNumber = orderNumber;
+            OrderNumber = orderNumber;
         }
 
-        public int GetOrderNumber()
+
+        public string DetDescription()
         {
-            return _orderNumber;
+            return _orderDescription;
         }
-
-        public void SetOrderNumber(int orderNumber)
+        
+        public void AddDescription(string descr)
         {
-            _orderNumber = orderNumber;
+            _orderDescription = descr;
         }
+        
+        public void AddProduct(Product product)
+        {
+            if (product.Id < 1)
+            {
+                throw new ArgumentException(nameof(product));
+            }
+            _products.Add(product);
+        }
+        
 
-        public int OrderNumber { get { return _orderNumber; } set { _orderNumber = value; } }
+
+        //public int OrderNumber { get { return _orderNumber; } set { _orderNumber = value; } }
     }
 
     internal class OrderTest
@@ -29,12 +54,16 @@ namespace CSharpBasics
         [Test]
         public void OrderTest1()
         {
-            var order1 = new Order(1);
-            order1.OrderNumber = 1;
-            order1.SetOrderNumber(1);
-            var orderNumber = order1.GetOrderNumber();
+            var order1 = new Order(2);
+            var on = order1.OrderNumber;
+            order1.OrderNumber = 3;
+            //order1.SetOrderNumber(3);
+            //var orderNumber = order1.GetOrderNumber();
 
-            Assert.That(orderNumber, Is.EqualTo(1));
+            //order1.AddProduct(new Product(1));
+            //order1._products.Add(new Product(2));
+
+            Assert.That(order1.OrderNumber, Is.EqualTo(3));
         }
 
     }
