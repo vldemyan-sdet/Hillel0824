@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.DevTools.V125.Input;
 using OpenQA.Selenium.Support.UI;
 
 namespace SeleniumDemoQA.Pages
@@ -21,7 +22,8 @@ namespace SeleniumDemoQA.Pages
 
         public void ScrollTo(IWebElement element)
         {
-            _js.ExecuteScript("arguments[0].scrollIntoView(true);", element);
+            //_js.ExecuteScript("arguments[0].scrollIntoView(true);", element);
+            _js.ExecuteScript("arguments[0].scrollIntoView(false);", element);
         }
 
         public void FillInput(By selector, string value)
@@ -37,6 +39,18 @@ namespace SeleniumDemoQA.Pages
             ScrollTo(element);
             element.Click();
         }
+        
+        public void WaitAndClickElement(By selector)
+        {
+            var timeStart = DateTime.Now;
+            WaitForElementVisible(selector);
+            var timeEnd = DateTime.Now;
+            Console.WriteLine(timeEnd - timeStart);
+
+            IWebElement element = FindElement(selector);
+            ScrollTo(element);
+            element.Click();
+        }
 
         public void SelectDefinedElement(By selector, string value)
         {
@@ -48,6 +62,24 @@ namespace SeleniumDemoQA.Pages
         {
             IWebElement element = _driver.FindElement(by);
             return element;
+        }
+        
+        public void WaitForElementVisible(By by, int sec = 3)
+        {
+            WebDriverWait wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(sec));
+            wait.Until(d => d.FindElement(by).Displayed);
+        }
+                 
+        public void WaitForElementInvisible(By by)
+        {
+            WebDriverWait wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(3));
+            wait.Until(d => !d.FindElement(by).Displayed);
+        }
+                
+        public void WaitForElementEnabled(By by)
+        {
+            WebDriverWait wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(3));
+            wait.Until(d => d.FindElement(by).Displayed && d.FindElement(by).Enabled);
         }
 
     }
