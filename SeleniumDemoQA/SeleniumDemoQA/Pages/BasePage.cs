@@ -25,6 +25,20 @@ namespace SeleniumDemoQA.Pages
             //_js.ExecuteScript("arguments[0].scrollIntoView(true);", element);
             _js.ExecuteScript("arguments[0].scrollIntoView(false);", element);
         }
+        public IWebElement GetElementBy(By selector)
+        {
+            return _driver.FindElement(selector);
+        }
+        public string GetElementText(By selector)
+        {
+            var element = GetElementBy(selector);
+            return element.Text;
+        }
+        protected bool IsElementDisplayed(By selector)
+        {
+            var element = GetElementBy(selector);
+            return element.Displayed;
+        }
 
         public void FillInput(By selector, string value)
         {
