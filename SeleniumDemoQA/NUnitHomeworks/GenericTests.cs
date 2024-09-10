@@ -3,6 +3,20 @@
     [TestFixture]
     public class GenericTests
     {
+        //public static void Swap(ref int x, ref int y) 
+        //{
+        //    int temp = x;
+        //    x = y;
+        //    y = temp;
+        //}
+                
+        //public static void Swap(ref string a, ref string b) 
+        //{
+        //    string temp = a;
+        //    a = b;
+        //    b = temp;
+        //}
+
         public static void Swap<T>(ref T a, ref T b)
         {
             T temp = a;
@@ -14,7 +28,7 @@
         public void Swap_ShouldSwapIntValues()
         {
             int x = 1, y = 2;
-            Swap(ref x, ref y);
+            Swap<int>(ref x, ref y);
             Assert.Multiple(() =>
             {
                 Assert.That(x, Is.EqualTo(2));
@@ -26,7 +40,7 @@
         public void Swap_ShouldSwapStringValues()
         {
             string a = "first", b = "second";
-            Swap(ref a, ref b);
+            Swap<string>(ref a, ref b);
             Assert.Multiple(() =>
             {
                 Assert.That(a, Is.EqualTo("second"));
