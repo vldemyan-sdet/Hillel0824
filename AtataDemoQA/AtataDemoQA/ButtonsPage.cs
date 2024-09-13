@@ -1,27 +1,28 @@
-﻿namespace AtataDemoQA
+﻿using Atata;
+using _ = AtataDemoQA.ButtonsPage;
+
+namespace AtataDemoQA
 {
     [Url("/buttons")]
-    public sealed class ButtonsPage : Page<ButtonsPage>
+    public sealed class ButtonsPage : Page<_>
     {
-        [FindById("doubleClickBtn")]
-        public Button<ButtonsPage> DoubleClickMe { get; private set; }
+        
+        public Button<_> ClickMe { get; set; }
+
+        [FindById("doubleClickBtn111")]
+        public Button<_> DoubleClickButton { get; set; }
 
         [FindById("rightClickBtn")]
-        public Button<ButtonsPage> RigthClickMe { get; private set; }
+        public Button<_> RightClickButton { get; set; }
 
-        [ScrollTo]
-        public Button<ButtonsPage> ClickMe { get; private set; }
 
         [FindById("dynamicClickMessage")]
-        public Text<ButtonsPage> DinamicClickMessage { get; private set; }
+        public Text<_> ClickMeResultText { get; set; }
 
         [FindById("rightClickMessage")]
-        public Text<ButtonsPage> RightClickMessage { get; private set; }
+        public Text<_> RightClickResultText { get; set; }
 
         [FindById("doubleClickMessage")]
-        public Text<ButtonsPage> DoubleClickMessage { get; private set; }
-
-        [FindByXPath("//h1[@class='text-center' and text()='Buttons']")]
-        public H1<ButtonsPage> ButtonsTitle { get; set; }
+        public Text<_> DoubleClickResultText { get; set; }
     }
 }

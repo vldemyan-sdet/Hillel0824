@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.9.34622.214
+VisualStudioVersion = 17.8.34525.116
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AtataDemoQA", "AtataDemoQA\AtataDemoQA.csproj", "{B2259812-1F3D-4D10-B29C-5DDDA97278F3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AtataDemoQA", "AtataDemoQA\AtataDemoQA.csproj", "{00380963-D95F-410F-9718-F04D399C1A6E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{B2259812-1F3D-4D10-B29C-5DDDA97278F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B2259812-1F3D-4D10-B29C-5DDDA97278F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B2259812-1F3D-4D10-B29C-5DDDA97278F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B2259812-1F3D-4D10-B29C-5DDDA97278F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{00380963-D95F-410F-9718-F04D399C1A6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00380963-D95F-410F-9718-F04D399C1A6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00380963-D95F-410F-9718-F04D399C1A6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00380963-D95F-410F-9718-F04D399C1A6E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {09F0B3D5-BA93-43CE-B343-D35C03C82F85}
+		SolutionGuid = {8AFC434C-C5BE-482F-BAD5-DAD8CE2ECEE9}
 	EndGlobalSection
 EndGlobal
