@@ -91,5 +91,28 @@ namespace NUnitHomeworks
             Assert.That(p1.Equals(p2), Is.False);
             Assert.That(p2, Is.Not.EqualTo(p1));
         }
+
+        // Test for List<T> equality
+        [Test]
+        public void ListOfT_DefaultEquals_ReturnsFalseForSameValues()
+        {
+            List<int> list1 = new List<int> { 1, 2, 3 };
+            List<int> list2 = new List<int> { 1, 2, 3 };
+
+            // Even though the lists contain the same values, they are different instances.
+            Assert.IsFalse(list1.Equals(list2));
+            Assert.AreNotEqual(list1, list2);
+        }
+
+        [Test]
+        public void ListOfT_DefaultReferenceEquality_ReturnsTrueForSameInstance()
+        {
+            List<int> list1 = new List<int> { 1, 2, 3 };
+            List<int> list2 = list1; // Pointing list2 to the same instance as list1
+
+            // Reference equality: since both point to the same instance, they are considered equal.
+            Assert.IsTrue(list1.Equals(list2));
+            Assert.AreEqual(list1, list2);
+        }
     }
 }
