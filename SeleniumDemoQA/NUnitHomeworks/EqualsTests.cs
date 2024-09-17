@@ -101,7 +101,7 @@ namespace NUnitHomeworks
 
             // Even though the lists contain the same values, they are different instances.
             Assert.IsFalse(list1.Equals(list2));
-            Assert.AreNotEqual(list1, list2);
+            Assert.That(list2, Is.Not.EqualTo(list1));
         }
 
         [Test]
@@ -112,7 +112,7 @@ namespace NUnitHomeworks
 
             // Reference equality: since both point to the same instance, they are considered equal.
             Assert.IsTrue(list1.Equals(list2));
-            Assert.AreEqual(list1, list2);
+            Assert.That(list2, Is.EqualTo(list1));
         }
     }
 }
