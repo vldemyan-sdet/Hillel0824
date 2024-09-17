@@ -20,19 +20,19 @@ namespace NUnitHomeworks
         public int Age { get; set; }
 
         // Override Equals to compare properties instead of references
-        //public override bool Equals(object obj)
-        //{
-        //    if (obj == null || GetType() != obj.GetType())
-        //        return false;
+        public override bool Equals(object obj)
+        {
+            if (obj == null || GetType() != obj.GetType())
+                return false;
 
-        //    Person2 other = (Person2)obj;
-        //    return Name == other.Name && Age == other.Age;
-        //}
+            Person2 other = (Person2)obj;
+            return Name == other.Name && Age == other.Age;
+        }
 
-        //public override int GetHashCode()
-        //{
-        //    return (Name, Age).GetHashCode();
-        //}
+        public override int GetHashCode()
+        {
+            return (Name, Age).GetHashCode();
+        }
     }
 
 
@@ -42,6 +42,14 @@ namespace NUnitHomeworks
         [Test]
         public void ValueType_Equals_ReturnsTrueForSameValues()
         {
+            var s1 = "qwe";
+            var s2 = "qwe";
+            Assert.That(5, Is.EqualTo(5));
+            Assert.That(s1.Equals(s2));
+            Assert.That(s1 == s2);
+
+            var a = 5.Equals(5);
+
             Point p1 = new Point { X = 5, Y = 10 };
             Point p2 = new Point { X = 5, Y = 10 };
 
@@ -79,6 +87,7 @@ namespace NUnitHomeworks
 
             // With overridden Equals, this checks for value equality (true)
             Assert.That(p1.Equals(p2), Is.True);
+            //Assert.That(p1 == p2, Is.True);
             Assert.That(p2, Is.EqualTo(p1));  // Same effect, uses Equals
         }
 
@@ -101,7 +110,7 @@ namespace NUnitHomeworks
 
             // Even though the lists contain the same values, they are different instances.
             Assert.IsFalse(list1.Equals(list2));
-            Assert.That(list2, Is.Not.EqualTo(list1));
+            Assert.AreEqual(list2, list1);
         }
 
         [Test]

@@ -3,7 +3,7 @@ using OpenQA.Selenium.Chrome;
 
 namespace SeleniumDemoQA.Tests
 {
-    public class BaseClass
+    public abstract class BaseClass
     {
         public IWebDriver _driver;
         public IJavaScriptExecutor _js;
