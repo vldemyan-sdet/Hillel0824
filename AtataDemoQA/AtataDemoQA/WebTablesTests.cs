@@ -11,7 +11,8 @@ namespace AtataDemoQA
         {
             Go.To<WebTablesPage>()
                 .People
-                .Rows.First(r => r.FirstName.Equals("Alden")).Delete.Click();
+                .Rows[r => r.FirstName.Content.Value.Equals("Alden")].DeleteButton.Click();
         }
+
     }
 }
