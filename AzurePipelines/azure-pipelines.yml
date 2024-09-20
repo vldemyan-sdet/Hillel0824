@@ -1,0 +1,28 @@
+trigger:
+- none #main
+
+pool: Default
+
+variables:
+  buildConfiguration: 'Release'
+
+steps:
+- task: UseDotNet@2
+  displayName: 'Install .NET Core SDK'
+  inputs:
+    version: 8.x
+    performMultiLevelLookup: true
+
+- task: DotNetCoreCLI@2
+  displayName: Build
+  inputs:
+    command: build
+    projects: 'SeleniumDemoQA/NUnitHomeworks/*.csproj'
+    arguments: '--configuration $(buildConfiguration)'
+
+- task: DotNetCoreCLI@2
+  displayName: Test
+  inputs:
+    command: test
+    projects: 'SeleniumDemoQA/NUnitHomeworks/*.csproj'
+    arguments: '--configuration $(buildConfiguration)' 

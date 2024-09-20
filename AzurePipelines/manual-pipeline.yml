@@ -1,0 +1,20 @@
+﻿trigger: none  # Disable automatic triggers
+
+pool: 
+  name: Default
+
+# Define a manual trigger with parameters
+parameters:
+- name: name
+  displayName: 'Person to greet'
+  type: string
+  default: 'World'
+
+jobs:
+- job: greet
+  displayName: 'Greet Job'
+
+  steps:
+    - checkout: none
+    - script: echo "Hello ${{ parameters.name }}"
+      displayName: 'Send Greeting'
