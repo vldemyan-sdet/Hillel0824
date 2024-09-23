@@ -3,8 +3,12 @@ name: .NET
 on:
   push:
     branches: [ "main" ]
+    paths:
+      - 'SeleniumDemoQA/NUnitHomeworks/**'
   pull_request:
     branches: [ "main" ]
+    paths:
+      - 'SeleniumDemoQA/NUnitHomeworks/**'
 
 jobs:
   build:
