@@ -1,0 +1,37 @@
+﻿trigger: none
+  # branches:
+  #   include:
+  #     - '*'  # Trigger the pipeline on all branch pushes
+
+pool: 
+  name: Default
+  #vmImage: 'ubuntu-latest'  # Use the latest Ubuntu VM image
+
+jobs:
+- job: ExploreAzurePipelines
+  displayName: 'Explore Azure Pipelines'
+  steps:
+    - script: echo "🎉 The job was automatically triggered by a $(Build.Reason) event."
+      displayName: 'Job Trigger Info'
+      
+    - script: echo "🐧 This job is now running on agent $(Agent.Name) OS $(Agent.OS)"
+      displayName: 'Running on Ubuntu'
+
+    - script: echo "🔎 The name of your branch is $(Build.SourceBranch) and your repository is $(Build.Repository.Name)."
+      displayName: 'Branch and Repository Info'
+
+    - checkout: self
+
+    - script: echo "💡 The $(Build.Repository.Name) repository has been cloned to the agent."
+      displayName: 'Repository Cloned Info'
+
+    - script: echo "🖥️ The workflow is now ready to test your code on the agent."
+      displayName: 'Ready for Code Testing'
+
+    - script: |
+        pwd
+        ls $(Build.SourcesDirectory)
+      displayName: 'List files in the repository'
+
+    - script: echo "🍏 This job's status is $(Agent.JobStatus)."
+      displayName: 'Job Status'
