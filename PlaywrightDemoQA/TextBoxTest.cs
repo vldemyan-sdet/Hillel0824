@@ -1,8 +1,4 @@
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using Microsoft.Playwright;
-using Microsoft.Playwright.NUnit;
-using NUnit.Framework;
 
 namespace PlaywrightTests;
 
@@ -32,4 +28,5 @@ public class TextBoxTest
         await Assertions.Expect(page.Locator("#output")).ToContainTextAsync("Current Address :Some address 1");
         await Assertions.Expect(page.Locator("#output")).ToContainTextAsync("Permananet Address :some address 2");
     }
+
 }
