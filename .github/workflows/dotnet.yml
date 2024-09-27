@@ -7,8 +7,6 @@ on:
       - 'SeleniumDemoQA/NUnitHomeworks/**'
   pull_request:
     branches: [ "main" ]
-    paths:
-      - 'SeleniumDemoQA/NUnitHomeworks/**'
 
 jobs:
   build:
