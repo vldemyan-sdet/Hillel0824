@@ -6,6 +6,7 @@ namespace LambdatestEcom
     {
         public IPage page { get; private set; }
         private IBrowser browser;
+        private IBrowserContext context;
 
         [SetUp]
         public async Task Setup()
@@ -16,7 +17,7 @@ namespace LambdatestEcom
                 Headless = false
             });
 
-            var context = await browser.NewContextAsync(new BrowserNewContextOptions
+            context = await browser.NewContextAsync(new BrowserNewContextOptions
             {
                 ViewportSize = new ViewportSize
                 {
@@ -25,13 +26,30 @@ namespace LambdatestEcom
                 }
             });
 
+            await context.Tracing.StartAsync(new()
+            {
+                Title = $"{TestContext.CurrentContext.Test.ClassName}.{TestContext.CurrentContext.Test.Name}",
+                Screenshots = true,
+                Snapshots = true,
+                Sources = true
+            });
+
             page = await context.NewPageAsync();
-            page.SetDefaultTimeout(5000);
+            //page.SetDefaultTimeout(5000);
         }
 
         [TearDown]
         public async Task Teardown()
         {
+            await context.Tracing.StopAsync(new()
+            {
+                Path = Path.Combine(
+                TestContext.CurrentContext.WorkDirectory,
+                "playwright-traces",
+                $"{TestContext.CurrentContext.Test.ClassName}.{TestContext.CurrentContext.Test.Name}.zip"
+            )
+            });
+
             await page.CloseAsync();
             await browser.CloseAsync();
         }
