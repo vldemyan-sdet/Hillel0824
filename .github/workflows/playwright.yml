@@ -4,6 +4,10 @@ on:
     branches: [ Lesson_15 ]
   pull_request:
     branches: [ main ]
+
+env:
+  CI: true
+
 jobs:
   test:
     timeout-minutes: 10

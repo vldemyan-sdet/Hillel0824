@@ -11,10 +11,12 @@ namespace LambdatestEcom
         [SetUp]
         public async Task Setup()
         {
+            var ciEnv = Environment.GetEnvironmentVariable("CI");
+
             var playwrightDriver = await Playwright.CreateAsync();
             browser = await playwrightDriver.Chromium.LaunchAsync(new BrowserTypeLaunchOptions
             {
-                Headless = false
+                Headless = ciEnv == "true"
             });
 
             context = await browser.NewContextAsync(new BrowserNewContextOptions
