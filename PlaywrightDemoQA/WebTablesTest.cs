@@ -9,10 +9,12 @@ public class WebTablesTest
     [Test]
     public async Task DeleteRow()
     {
+        var ciEnv = Environment.GetEnvironmentVariable("CI");
+
         using var playwright = await Playwright.CreateAsync();
         await using var browser = await playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions
         {
-            Headless = false,
+            Headless = ciEnv == "true",
         });
         var context = await browser.NewContextAsync();
 
