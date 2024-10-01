@@ -16,8 +16,8 @@ namespace LambdatestEcom.Pages
         public async Task FillUserDetails(UserDetails userDetails)
         {
             await _page.GetByRole(AriaRole.Textbox, new() { Name = "First Name*" }).FillAsync(userDetails.FirstName);
-            await _page.GetByRole(AriaRole.Textbox, new() { Name = "Last Name*" }).FillAsync(userDetails.LastName);
-            await _page.GetByRole(AriaRole.Textbox, new() { Name = "E-Mail*" }).FillAsync(userDetails.Email);
+            await _page.GetByRole(AriaRole.Textbox, new() { Name = "Last Name" }).FillAsync(userDetails.LastName);
+            await _page.GetByRole(AriaRole.Textbox, new() { Name = "E-Mail" }).FillAsync(userDetails.Email);
             await _page.GetByPlaceholder("Telephone").FillAsync(userDetails.Telephone);
             await _page.GetByRole(AriaRole.Textbox, new() { Name = "Password*" }).FillAsync(userDetails.Password);
             await _page.GetByPlaceholder("Password Confirm").FillAsync(userDetails.ConfirmPassword);
@@ -27,7 +27,7 @@ namespace LambdatestEcom.Pages
         {
             await _page.GetByRole(AriaRole.Textbox, new() { Name = "Address 1" }).FillAsync(billingAddress.Address1);
             await _page.GetByRole(AriaRole.Textbox, new() { Name = "Address 2" }).FillAsync(billingAddress.Address2);
-            await _page.GetByRole(AriaRole.Textbox, new() { Name = "City*" }).FillAsync(billingAddress.City);
+            await _page.GetByRole(AriaRole.Textbox, new() { Name = "City" }).FillAsync(billingAddress.City);
             await _page.GetByRole(AriaRole.Textbox, new() { Name = "Post Code" }).FillAsync(billingAddress.PostCode);
 
             await SelectOptionByText(_page.Locator("#input-payment-country"), billingAddress.Country);
