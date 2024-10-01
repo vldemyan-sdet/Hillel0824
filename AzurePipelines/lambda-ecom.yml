@@ -1,0 +1,36 @@
+trigger:
+- none #main
+
+pool: Default
+
+variables:
+  buildConfiguration: 'Release'
+
+steps:
+- task: UseDotNet@2
+  displayName: 'Install .NET Core SDK'
+  inputs:
+    version: 8.x
+    performMultiLevelLookup: true
+
+- task: DotNetCoreCLI@2
+  displayName: Build
+  inputs:
+    command: build
+    projects: 'LambdatestEcom/*.csproj'
+    arguments: '--configuration $(buildConfiguration)'
+
+- task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    script: ./LambdatestEcom/bin/Release/net8.0/playwright.ps1 install --with-deps
+  displayName: Install Playwright dependencies
+
+- task: DotNetCoreCLI@2
+  displayName: Test
+  env:
+    CI: true
+  inputs:
+    command: test
+    projects: 'LambdatestEcom/*.csproj'
+    arguments: '--configuration $(buildConfiguration)' 
