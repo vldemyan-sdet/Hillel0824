@@ -1,6 +1,7 @@
 using Microsoft.Playwright;
+using System;
 
-namespace LambdatestEcom
+namespace CarCareTracker
 {
     public class UITestFixture
     {
@@ -26,7 +27,8 @@ namespace LambdatestEcom
                     Width = 1920,
                     Height = 1080
                 },
-                StorageStatePath = "../../../playwright/.auth/state.json"
+                IgnoreHTTPSErrors = true
+                //StorageStatePath = "../../../playwright/.auth/state.json"
             });
 
             await context.Tracing.StartAsync(new()
@@ -38,6 +40,15 @@ namespace LambdatestEcom
             });
 
             page = await context.NewPageAsync();
+
+            var multipart = context.APIRequest.CreateFormData();
+            // Only name and value are set.
+            multipart.Append("userName", "test");
+            multipart.Append("password", "1234");
+ 
+
+            await page.APIRequest.PostAsync("https://localhost:54356/Login/Login", 
+                new() { Form = multipart });
 
             //await page.GotoAsync("https://ecommerce-playground.lambdatest.io/index.php?route=account/login");
             //await page.GetByPlaceholder("E-Mail Address").ClickAsync();
