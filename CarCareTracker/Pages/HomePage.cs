@@ -1,10 +1,12 @@
 ﻿using Microsoft.Playwright;
+using System;
 
 namespace CarCareTracker.Pages
 {
     internal class HomePage
     {
         private readonly IPage _page;
+
 
         public HomePage(IPage page)
         {
@@ -36,6 +38,11 @@ namespace CarCareTracker.Pages
         public async Task OpenCar(string licensePlate)
         {
             await _page.Locator("p.card-text").GetByText(licensePlate, new() { Exact = true }).First.ClickAsync();
+        }
+        
+        public ILocator GetUserNameLocator(string userName)
+        {
+            return _page.Locator(".dropdown").GetByRole(AriaRole.Button, new() { Name = userName });
         }
 
     }
