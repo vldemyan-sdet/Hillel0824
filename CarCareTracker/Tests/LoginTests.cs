@@ -5,20 +5,19 @@ namespace CarCareTracker.Tests
 {
     [Parallelizable(ParallelScope.Self)]
     [TestFixture]
-    public class ExampleTest : UITestFixture
+    public class LoginTest : UITestFixture
     {
         [Test]
-        public async Task CheckoutAsNewUser()
+        public async Task CheckStateIsLoaded()
         {
             // Arrange
             var homePage = new HomePage(page);
 
-
             // Act
             await homePage.Open();
 
-
             // Assert
+            await Assertions.Expect(homePage.GetUserNameLocator("test")).ToBeVisibleAsync();
         }        
         
 
