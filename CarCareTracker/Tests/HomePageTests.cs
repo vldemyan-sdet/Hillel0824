@@ -22,6 +22,7 @@ namespace CarCareTracker.Tests
             await homePage.OpenCar("BM 1234 MB");
 
             await vehiclePage.OpenServiceRecords();
+            //await page.PauseAsync();
 
             await serviceRecordPage.Add("10/13/2024", 123, "service record description", 105.89m, "tag1s");
             

@@ -89,7 +89,7 @@ namespace CarCareTracker
                 });
             }
 
-            page.SetDefaultTimeout(5000);
+            //page.SetDefaultTimeout(5000);
         }
 
         [TearDown]

@@ -8,6 +8,6 @@ namespace CarCareTracker
 {
     public static class Constants
     {
-        public static string BaseUrl = "https://localhost:51858";
+        public static string BaseUrl = "https://localhost:54356";
     }
 }

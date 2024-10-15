@@ -13,10 +13,17 @@ namespace CarCareTracker.Pages
      
         public async Task Add(string date, int milage, string description, decimal cost, string tag, string serviceRecordNotes = "")
         {
+            //var locator = _page.Locator(".datepicker-days .table-condensed");
+            //await _page.AddLocatorHandlerAsync(locator, async (overlay) =>
+            //{
+            //    await overlay.Locator("//*[@class='day']").First.ClickAsync();
+            //}, new() { Times = 3, NoWaitAfter = true });
+
             await _page.GetByRole(AriaRole.Button, new() { Name = "Add Service Record" }).ClickAsync();
             await _page.Locator("#serviceRecordDate").ClearAsync();
             await _page.Locator("#serviceRecordDate").PressSequentiallyAsync(date);
             await _page.Locator(".active.day").ClickAsync();
+
             await _page.Locator("#serviceRecordMileage").FillAsync(milage.ToString());
             await _page.Locator("#serviceRecordDescription").FillAsync(description);
             await _page.Locator("#serviceRecordCost").FillAsync(cost.ToString());

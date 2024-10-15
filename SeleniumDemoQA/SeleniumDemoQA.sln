@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CSharpBasics", "CSharpBasic
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Houses", "Houses\Houses.csproj", "{FE888ED6-A03B-44B8-BFDA-9A19E66E1358}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NUnitHomeworks", "NUnitHomeworks\NUnitHomeworks.csproj", "{158C4102-17E6-44A7-AB26-CFFE837C8128}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NUnitHomeworks", "NUnitHomeworks\NUnitHomeworks.csproj", "{158C4102-17E6-44A7-AB26-CFFE837C8128}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpecFlowSeleniumDemoQA", "SpecFlowSeleniumDemoQA\SpecFlowSeleniumDemoQA.csproj", "{2405A522-1529-4828-A8B4-E45690177770}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{158C4102-17E6-44A7-AB26-CFFE837C8128}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{158C4102-17E6-44A7-AB26-CFFE837C8128}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{158C4102-17E6-44A7-AB26-CFFE837C8128}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2405A522-1529-4828-A8B4-E45690177770}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2405A522-1529-4828-A8B4-E45690177770}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2405A522-1529-4828-A8B4-E45690177770}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2405A522-1529-4828-A8B4-E45690177770}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
