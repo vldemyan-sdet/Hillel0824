@@ -41,14 +41,19 @@ namespace CarCareTracker
 
             page = await context.NewPageAsync();
 
-            var multipart = context.APIRequest.CreateFormData();
+            var multipart = page.APIRequest.CreateFormData();
             // Only name and value are set.
             multipart.Append("userName", "test");
             multipart.Append("password", "1234");
  
 
-            await page.APIRequest.PostAsync("https://localhost:54356/Login/Login", 
+            var loginResult = await page.APIRequest.PostAsync($"{Constants.BaseUrl}/Login/Login", 
                 new() { Form = multipart });
+            
+            //var restoreResult = await page.APIRequest.GetAsync($"{Constants.BaseUrl}/api/demo/restore");
+            //var body = await restoreResult.JsonAsync();
+            //await Console.Out.WriteLineAsync(body.ToString());
+            //await Console.Out.WriteLineAsync(restoreResult.Status.ToString());
 
             //await page.GotoAsync("https://ecommerce-playground.lambdatest.io/index.php?route=account/login");
             //await page.GetByPlaceholder("E-Mail Address").ClickAsync();
