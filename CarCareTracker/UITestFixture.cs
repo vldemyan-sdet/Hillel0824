@@ -54,12 +54,26 @@ namespace CarCareTracker
 
             page = await context.NewPageAsync();
 
-            //var multipart = context.APIRequest.CreateFormData();
-            //// Only name and value are set.
-            //multipart.Append("userName", "test");
-            //multipart.Append("password", "1234");
+            var multipart = page.APIRequest.CreateFormData();
+            // Only name and value are set.
+            multipart.Append("userName", "test");
+            multipart.Append("password", "1234");
+ 
 
+            var loginResult = await page.APIRequest.PostAsync($"{Constants.BaseUrl}/Login/Login", 
+                new() { Form = multipart });
+            
+            //var restoreResult = await page.APIRequest.GetAsync($"{Constants.BaseUrl}/api/demo/restore");
+            //var body = await restoreResult.JsonAsync();
+            //await Console.Out.WriteLineAsync(body.ToString());
+            //await Console.Out.WriteLineAsync(restoreResult.Status.ToString());
 
+            //await page.GotoAsync("https://ecommerce-playground.lambdatest.io/index.php?route=account/login");
+            //await page.GetByPlaceholder("E-Mail Address").ClickAsync();
+            //await page.GetByPlaceholder("E-Mail Address").FillAsync("test111@test111.com");
+            //await page.GetByPlaceholder("Password").ClickAsync();
+            //await page.GetByPlaceholder("Password").FillAsync("qweasd123");
+            //await page.GetByRole(AriaRole.Button, new() { Name = "Login" }).ClickAsync();
             //await page.APIRequest.PostAsync("https://localhost:54356/Login/Login", 
             //    new() { Form = multipart });
             await page.GotoAsync("https://localhost:54356/Home");
@@ -75,7 +89,7 @@ namespace CarCareTracker
                 });
             }
 
-            page.SetDefaultTimeout(5000);
+            //page.SetDefaultTimeout(5000);
         }
 
         [TearDown]
