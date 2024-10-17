@@ -1,13 +1,14 @@
 using NUnit.Framework;
 using SpecFlowSeleniumDemoQA.Pages;
-using System;
-using TechTalk.SpecFlow;
 
 namespace SpecFlowSeleniumDemoQA.StepDefinitions
 {
     [Binding]
     public class TextBoxStepDefinitions : BaseClass
     {
+        public TextBoxStepDefinitions(ScenarioContext scenarioContext) : base(scenarioContext)
+        {
+        }
 
         [Given(@"Open Text Box page")]
         public void GivenOpenTextBoxPage()

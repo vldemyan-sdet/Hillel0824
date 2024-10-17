@@ -1,6 +1,5 @@
 ﻿Feature: TextBox
 
-@mytag
 Scenario: Fill form with valid data
 	Given Open Text Box page
 

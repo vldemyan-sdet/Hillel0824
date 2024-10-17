@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SpecFlowSeleniumDemoQA.Pages
 {
-    internal class TextBoxPage : BasePage
+    public class TextBoxPage : BasePage
     {
         public TextBoxPage(IWebDriver driver) : base(driver)
         {
