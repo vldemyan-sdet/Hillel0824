@@ -12,7 +12,7 @@ namespace SpecFlowSeleniumDemoQA.Hooks
             _scenarioContext = scenarioContext;
         }
 
-        [BeforeScenario]
+        [BeforeScenario(Order = 10)]
         public void InitializeWebDriver()
         {
             var options = new ChromeOptions();
@@ -31,5 +31,6 @@ namespace SpecFlowSeleniumDemoQA.Hooks
                 driver.Dispose();
             }
         }
+
     }
 }
