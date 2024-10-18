@@ -41,6 +41,11 @@
     }
     public class ConfigurationManager
     {
+        private int i;
+        public ConfigurationManager(int index)
+        {
+            i = index;
+        }
         // Static field to hold configuration
         public static string ConfigValue;
 
@@ -78,17 +83,21 @@
     public class AppSettings
     {
         // Static dictionary to hold settings
-        public static readonly Dictionary<string, string> Settings;
+        public static readonly Dictionary<string, string> Settings = new Dictionary<string, string>() { { "AppName", "asd" } };
 
         // Static constructor to load settings
         static AppSettings()
         {
             Settings = new Dictionary<string, string>
-        {
-            { "AppName", "MyApplication" },
-            { "Version", "1.0.0" }
-        };
+            {
+                { "AppName", "MyApplication" },
+                { "Version", "1.0.0" }
+            };
             Console.WriteLine("Static constructor called. Settings loaded.");
+        }
+        public void Print()
+        {
+            Console.WriteLine("qwe");
         }
     }
 
@@ -162,6 +171,8 @@
         public void ConfigValue_ShouldBeInitialized_WhenClassIsFirstAccessed()
         {
             // Act
+            var instance1 = new ConfigurationManager(12);
+            var instance2 = new ConfigurationManager(12);
             string value = ConfigurationManager.ConfigValue;
 
             // Assert
