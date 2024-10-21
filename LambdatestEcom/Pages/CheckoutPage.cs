@@ -14,6 +14,7 @@ namespace LambdatestEcom.Pages
         public async Task FillUserInfo(string randomString)
         {
             var email = $"alex.conner{randomString}@jmail.com";
+            await Console.Out.WriteLineAsync(email);
 
             await _page.GetByRole(AriaRole.Textbox, new() { Name = "First Name*" }).FillAsync("Alex");
             await _page.GetByRole(AriaRole.Textbox, new() { Name = "Last Name*" }).FillAsync("Conner");
@@ -28,9 +29,13 @@ namespace LambdatestEcom.Pages
             await _page.Locator("#input-payment-zone").SelectOptionAsync(new[] { "3499" });
         }
 
-        public async Task AcceptPolicies()
+        public async Task AcceptPolicy()
         {
             await _page.GetByText("I have read and agree to the Privacy Policy").ClickAsync();
+        }
+        
+        public async Task AcceptTermsAndConditions()
+        {
             await _page.GetByText("I have read and agree to the Terms & Conditions").ClickAsync();
         }
         

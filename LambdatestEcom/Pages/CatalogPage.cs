@@ -16,7 +16,7 @@ namespace LambdatestEcom.Pages
 
             await _page.Locator("#container .mz-filter-group.stock_status").GetByText("In stock").ClickAsync();
             await _page.WaitForURLAsync("**/*&mz_fss*");
-            //await _page.WaitForTimeoutAsync(3000);
+
             await _page.WaitForLoadStateAsync(LoadState.NetworkIdle);
             await _page.WaitForLoadStateAsync(LoadState.DOMContentLoaded);
         }
@@ -25,7 +25,6 @@ namespace LambdatestEcom.Pages
         {
             await _page.Locator(".product-thumb-top").Nth(productIndex).HoverAsync();
             await _page.Locator(".product-thumb-top").Nth(productIndex).GetByRole(AriaRole.Button).Filter(new() { HasText = "Add to Cart" }).ClickAsync();
-            //await _page.Locator(".product-thumb-top").Nth(productIndex).GetByRole(AriaRole.Button).First.ClickAsync();
         }
         
         public async Task GoToCheckout()
@@ -33,5 +32,9 @@ namespace LambdatestEcom.Pages
             await _page.GetByRole(AriaRole.Link, new() { Name = "Checkout" }).ClickAsync();
         }
 
+        internal async Task UseExistingAddress()
+        {
+            await _page.Locator("#payment-address").GetByText("I want to use an existing").ClickAsync();
+        }
     }
 }
