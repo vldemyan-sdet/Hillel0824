@@ -1,15 +1,18 @@
 using NUnit.Framework;
 using SpecFlowSeleniumDemoQA.Pages;
-using System;
-using TechTalk.SpecFlow;
 
 namespace SpecFlowSeleniumDemoQA.StepDefinitions
 {
     [Binding]
     public class TextBoxStepDefinitions : BaseClass
     {
+        public TextBoxStepDefinitions(ScenarioContext scenarioContext) : base(scenarioContext)
+        {
+            Console.WriteLine("TextBoxStepDefinitions(ScenarioContext scenarioContext) : base(scenarioContext)");
+        }
 
         [Given(@"Open Text Box page")]
+        [Given(@"Opening Text Box page")]
         public void GivenOpenTextBoxPage()
         {
             var textBoxPage = new TextBoxPage(_driver);
@@ -51,11 +54,5 @@ namespace SpecFlowSeleniumDemoQA.StepDefinitions
             textBoxPage.SubmitForm();
         }
 
-        [Then(@"Output Name should be '([^']*)'")]
-        public void ThenOutputNameShouldBe(string p0)
-        {
-            var textBoxPage = new TextBoxPage(_driver);
-            Assert.That(textBoxPage.GetOutputName(), Is.EqualTo("Name:John Doe"));
-        }
     }
 }

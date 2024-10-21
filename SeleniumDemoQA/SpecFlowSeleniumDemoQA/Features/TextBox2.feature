@@ -1,6 +1,6 @@
-﻿Feature: TextBox
+﻿Feature: TextBox2
 
-Scenario: Fill form with valid data
+Scenario: Fill form with valid data 2
 	Given Open Text Box page
 
 	When Fill Full Name 'John Doe'
@@ -10,9 +10,9 @@ Scenario: Fill form with valid data
     And Submit Form
 	Then Output Name should be 'Name:John Doe'
 
-    @myTag
-Scenario: Fill form with valid data 1_2
-	Given Opening Text Box page
+    
+Scenario: Fill form with valid data 2_2
+	Given Open Text Box page
 
 	When Fill Full Name 'John Doe'
     And Fill Email 'john.doe@example.com'

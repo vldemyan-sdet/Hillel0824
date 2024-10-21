@@ -1,28 +1,21 @@
-﻿using NUnit.Framework;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
+﻿using OpenQA.Selenium;
+using SpecFlowSeleniumDemoQA.Pages;
 
 namespace SpecFlowSeleniumDemoQA.StepDefinitions
 {
     public abstract class BaseClass
     {
         public IWebDriver _driver;
-        public IJavaScriptExecutor _js;
 
-        [BeforeScenario]
-        public void Setup()
+        public TextBoxPage textBoxPage;
+        public ScenarioContext scenarioContext;
+        public BaseClass(ScenarioContext scenarioContext)
         {
-            var options = new ChromeOptions();
-            options.AddArgument("window-size=1400,1200"); // Set desired resolution
-            _driver = new ChromeDriver(options);
-            //_driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(2);
-            _js = (IJavaScriptExecutor)_driver;
-        }
+            scenarioContext = scenarioContext;
+            _driver = scenarioContext["WebDriver"] as IWebDriver;
 
-        [AfterScenario]
-        public void TearDown()
-        {
-            _driver.Quit();
+            textBoxPage = new TextBoxPage(_driver);
+
         }
     }
 }

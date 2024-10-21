@@ -3,7 +3,7 @@ using OpenQA.Selenium.Support.UI;
 
 namespace SpecFlowSeleniumDemoQA.Pages
 {
-    internal class BasePage
+    public class BasePage
     {
         public IWebDriver _driver;
         public IJavaScriptExecutor _js;
