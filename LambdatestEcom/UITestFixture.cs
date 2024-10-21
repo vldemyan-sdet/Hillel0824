@@ -2,11 +2,14 @@ using Microsoft.Playwright;
 
 namespace LambdatestEcom
 {
-    public class UITestFixture
+    public class UITestFixture(bool useState)
     {
         public IPage page { get; private set; }
         private IBrowser browser;
-        private IBrowserContext context;
+        public IBrowserContext context;
+        private bool _useState = useState;
+        private string stateDir = "../../../playwright/.auth";
+        public string stateFile = "../../../playwright/.auth/state.json";
 
         [SetUp]
         public async Task Setup()
@@ -19,6 +22,15 @@ namespace LambdatestEcom
                 Headless = ciEnv == "true"
             });
 
+            if (_useState)
+            {
+                if (!Directory.Exists(stateDir))
+                    Directory.CreateDirectory(stateDir);
+
+                if (!File.Exists(stateFile))
+                    File.WriteAllText(stateFile, "{}");
+            }
+
             context = await browser.NewContextAsync(new BrowserNewContextOptions
             {
                 ViewportSize = new ViewportSize
@@ -26,7 +38,7 @@ namespace LambdatestEcom
                     Width = 1920,
                     Height = 1080
                 },
-                StorageStatePath = "../../../playwright/.auth/state.json"
+                StorageStatePath = _useState ? "../../../playwright/.auth/state.json" : null,
             });
 
             await context.Tracing.StartAsync(new()
@@ -38,18 +50,6 @@ namespace LambdatestEcom
             });
 
             page = await context.NewPageAsync();
-
-            //await page.GotoAsync("https://ecommerce-playground.lambdatest.io/index.php?route=account/login");
-            //await page.GetByPlaceholder("E-Mail Address").ClickAsync();
-            //await page.GetByPlaceholder("E-Mail Address").FillAsync("test111@test111.com");
-            //await page.GetByPlaceholder("Password").ClickAsync();
-            //await page.GetByPlaceholder("Password").FillAsync("qweasd123");
-            //await page.GetByRole(AriaRole.Button, new() { Name = "Login" }).ClickAsync();
-
-            //await context.StorageStateAsync(new()
-            //{
-            //    Path = "../../../playwright/.auth/state.json"
-            //});
 
             //page.SetDefaultTimeout(5000);
         }
