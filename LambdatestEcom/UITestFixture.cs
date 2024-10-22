@@ -2,15 +2,15 @@ using Microsoft.Playwright;
 
 namespace LambdatestEcom
 {
-    public class UITestFixture(bool useState)
+    public class UITestFixture
     {
         public IPage page { get; private set; }
         private IBrowser browser;
         public IBrowserContext context;
-        private bool _useState = useState;
+        private bool _useState;
         private string stateDir = "../../../playwright/.auth";
         public string stateFile = "../../../playwright/.auth/state.json";
-
+        public UITestFixture(bool useState) { _useState = useState; }
         [SetUp]
         public async Task Setup()
         {
