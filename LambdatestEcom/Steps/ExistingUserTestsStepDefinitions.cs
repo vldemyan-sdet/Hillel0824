@@ -8,7 +8,7 @@ namespace LambdatestEcom.Steps
     [Binding]
     public class ExistingUserTestsStepDefinitions : UITestFixture
 {
-        public ExistingUserTestsStepDefinitions() : base(false)
+        public ExistingUserTestsStepDefinitions(ScenarioContext scenarioContext) : base(scenarioContext)
         {
         }
 
