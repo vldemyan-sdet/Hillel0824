@@ -1,25 +1,17 @@
 using Microsoft.Playwright;
-using TechTalk.SpecFlow;
 
 namespace LambdatestEcom
 {
-    [Binding]
-    public class UITestFixture
+    public class UITestFixture(bool useState)
     {
-        private readonly ScenarioContext _scenarioContext;
         public IPage page { get; private set; }
         private IBrowser browser;
         public IBrowserContext context;
-        private bool _useState = true;
+        private bool _useState = useState;
         private string stateDir = "../../../playwright/.auth";
         public string stateFile = "../../../playwright/.auth/state.json";
-        public UITestFixture(ScenarioContext scenarioContext) 
-        {
-            // _useState = useState; 
-            _scenarioContext = scenarioContext;
-        }
 
-        [BeforeScenario(Order = 1)]
+        [SetUp]
         public async Task Setup()
         {
             var ciEnv = Environment.GetEnvironmentVariable("CI");
@@ -58,13 +50,11 @@ namespace LambdatestEcom
             });
 
             page = await context.NewPageAsync();
-            _scenarioContext["page"] = page;
-            _scenarioContext["context"] = context;
 
             //page.SetDefaultTimeout(5000);
         }
 
-        [AfterScenario]
+        [TearDown]
         public async Task Teardown()
         {
             await context.Tracing.StopAsync(new()
