@@ -2,21 +2,28 @@ using LambdatestEcom.Pages;
 using System;
 using TechTalk.SpecFlow;
 
-namespace LambdatestEcom.Steps
+namespace LambdatestEcom.Steps 
+{ 
 
     [Binding]
     public class ExistingUserTestsStepDefinitions : UITestFixture
 {
+        public ExistingUserTestsStepDefinitions() : base(false)
+        {
+        }
+
         [Given(@"open home page")]
-        public void GivenOpenHomePage()
+        public async Task GivenOpenHomePageAsync()
         {
             var homePage = new HomePage(page);
+            await homePage.Open();
         }
 
         [Given(@"open My account")]
-        public void GivenOpenMyAccount()
+        public async Task GivenOpenMyAccount()
         {
-            throw new PendingStepException();
+            var homePage = new HomePage(page);
+            await homePage.OpenMyAccount();
         }
     }
 }

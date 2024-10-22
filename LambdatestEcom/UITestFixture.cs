@@ -10,7 +10,10 @@ namespace LambdatestEcom
         private bool _useState;
         private string stateDir = "../../../playwright/.auth";
         public string stateFile = "../../../playwright/.auth/state.json";
-        public UITestFixture(bool useState) { _useState = useState; }
+        public UITestFixture(bool useState) 
+        { 
+            _useState = useState; 
+        }
         [SetUp]
         public async Task Setup()
         {
