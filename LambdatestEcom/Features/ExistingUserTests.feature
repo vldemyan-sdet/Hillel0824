@@ -1,8 +1,7 @@
 ﻿Feature: ExistingUserTests
 
-@tag1
+@login
 Scenario: CheckoutAsExistingUser
 	Given open home page
 	And open My account
-	When [action]
-	Then [outcome]
+
