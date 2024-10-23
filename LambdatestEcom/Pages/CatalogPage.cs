@@ -2,7 +2,7 @@
 
 namespace LambdatestEcom.Pages
 {
-    internal class CatalogPage
+    public class CatalogPage
     {
         private readonly IPage _page;
 
@@ -32,9 +32,5 @@ namespace LambdatestEcom.Pages
             await _page.GetByRole(AriaRole.Link, new() { Name = "Checkout" }).ClickAsync();
         }
 
-        internal async Task UseExistingAddress()
-        {
-            await _page.Locator("#payment-address").GetByText("I want to use an existing").ClickAsync();
-        }
     }
 }

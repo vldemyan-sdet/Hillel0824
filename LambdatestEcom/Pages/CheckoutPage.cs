@@ -2,7 +2,7 @@
 
 namespace LambdatestEcom.Pages
 {
-    internal class CheckoutPage
+    public class CheckoutPage
     {
         private readonly IPage _page;
 
@@ -27,6 +27,12 @@ namespace LambdatestEcom.Pages
             await _page.GetByRole(AriaRole.Textbox, new() { Name = "Post Code" }).FillAsync("40000");
             await _page.Locator("#input-payment-country").SelectOptionAsync(new[] { "220" });
             await _page.Locator("#input-payment-zone").SelectOptionAsync(new[] { "3499" });
+        }
+
+
+        internal async Task UseExistingAddress()
+        {
+            await _page.Locator("#payment-address").GetByText("I want to use an existing").ClickAsync();
         }
 
         public async Task AcceptPolicy()
