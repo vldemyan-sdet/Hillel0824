@@ -2,7 +2,7 @@
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Schema;
 
-namespace Evershop.Tests.API;
+namespace Evershop.Tests.API.Assertions;
 public static class ApiAssertExtensions
 {
     private static List<string> _xmlSchemaValidationErrors;
