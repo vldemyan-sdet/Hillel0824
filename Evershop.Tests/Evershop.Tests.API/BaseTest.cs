@@ -1,4 +1,5 @@
 ﻿using Evershop.Tests.API.Plugins;
+using Evershop.Tests.API.Settings;
 using NUnit.Framework;
 using System.Reflection;
 
@@ -14,6 +15,7 @@ public abstract class BaseTest
     [OneTimeSetUp]
     public void OneTimeSetup()
     {
+        ApiConfigurationLoader.LoadConfiguration();
         Configure();
         var testClassType = GetType();
         PluginExecutionEngine.OnBeforeTestClassInitialize(testClassType);
