@@ -15,7 +15,7 @@ namespace Evershop.Tests.API.Plugins
         {
             if (ApiSettings.EnableBDDLogging)
             {
-                Logger.LogInfo($"Start Test {memberInfo.GetType().Name}.{memberInfo.Name}");
+                Console.WriteLine($"Start Test {memberInfo.GetType().Name}.{memberInfo.Name}");
             }
         }
     }

@@ -23,7 +23,7 @@ public class ApiBddPlugin : ApiClientPlugin
 
     protected override void OnRequestTimeout(object sender, ClientEventArgs client)
     {
-        Logger.LogInfo("Request was not executed in the specified timeout.");
+        Console.WriteLine("Request was not executed in the specified timeout.");
     }
 
     protected override void OnMakingRequest(object sender, RequestEventArgs requestEventArgs)
@@ -39,16 +39,16 @@ public class ApiBddPlugin : ApiClientPlugin
             }
         }
 
-        Logger.LogInfo(sb.ToString().TrimEnd());
+        Console.WriteLine(sb.ToString().TrimEnd());
     }
 
     protected override void OnRequestMade(object sender, ResponseEventArgs responseEventArgs)
     {
-        Logger.LogInfo($"Response of request {responseEventArgs.Response.Request.Method} against resource {responseEventArgs.RequestUri} - {responseEventArgs.Response.ResponseStatus}");
+        Console.WriteLine($"Response of request {responseEventArgs.Response.Request.Method} against resource {responseEventArgs.RequestUri} - {responseEventArgs.Response.ResponseStatus}");
     }
 
     protected override void OnRequestFailed(object sender, ResponseEventArgs responseEventArgs)
     {
-        Logger.LogInfo($"Request Failed {responseEventArgs.Response.Request.Method} on URL {responseEventArgs.RequestUri} - {responseEventArgs.Response.ResponseStatus} {responseEventArgs.Response.ErrorMessage}");
+        Console.WriteLine($"Request Failed {responseEventArgs.Response.Request.Method} on URL {responseEventArgs.RequestUri} - {responseEventArgs.Response.ResponseStatus} {responseEventArgs.Response.ErrorMessage}");
     }
 }

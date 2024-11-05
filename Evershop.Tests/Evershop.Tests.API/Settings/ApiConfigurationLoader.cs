@@ -12,11 +12,6 @@ public class ApiConfigurationLoader
         ApiSettings.MaxRetryAttempts = 3;
         ApiSettings.EnableBDDLogging = true;
         ApiSettings.EnableToastMessages = true;
-
-        GlobalSettings.LoggingSettings.IsEnabled = true;
-        GlobalSettings.LoggingSettings.IsConsoleLoggingEnabled = true;
-        GlobalSettings.LoggingSettings.IsFileLoggingEnabled = false;
-        GlobalSettings.LoggingSettings.IsDebugLoggingEnabled = false;
     }
 
 }
