@@ -26,7 +26,7 @@ namespace PlayWrightWs
 
              */
 
-            await Page.RouteWebSocketAsync(new Regex("ws://localhost:5.*"), ws =>
+            await Page.RouteWebSocketAsync(new Regex(".*"), ws =>
             {
                 Console.WriteLine("ws.Url: " + ws.Url);
                 try
@@ -35,33 +35,36 @@ namespace PlayWrightWs
                     ws.OnMessage(message =>
                     {
                         Console.WriteLine("OnMessage -->" + ws.Url);
-                        ////Console.WriteLine(message.Text);
-                        ////Console.WriteLine(message.Binary?.Length);
-                        //if (message.Binary != null)
-                        //{
-                        //    server.Send(message.Binary);
-                        //}
-                        //else if (message.Text != null)
-                        //{
-                        //    server.Send(message.Text);
-                        //}
-                        //    //Console.WriteLine("END -------->");
+                        //Console.WriteLine(message.Text);
+                        //Console.WriteLine(message.Binary?.Length);
+                        if (message.Binary != null)
+                        {
+                            server.Send(message.Binary);
+                        }
+                        else if (message.Text != null)
+                        {
+                            Console.WriteLine(message.Text);
+                            server.Send(message.Text);
+                        }
+                        //Console.WriteLine("END -------->");
 
-                        //    server.OnMessage(message => {
-                        //        Console.WriteLine("OnMessage <--" + ws.Url);
-                        //        //Console.WriteLine(message.Text);
-                        //        //Console.WriteLine(message.Binary?.Length);
-                        //        if (message.Binary != null)
-                        //        {
-                        //            ws.Send(message.Binary);
-                        //        }
-                        //        else if (message.Text != null)
-                        //        {
-                        //            ws.Send(message.Text);
-                        //        }
-                        //        //Console.WriteLine("END <--------");
-                        //    });
+                        server.OnMessage(message =>
+                        {
+                            Console.WriteLine("OnMessage <--" + ws.Url);
+                            //Console.WriteLine(message.Text);
+                            //Console.WriteLine(message.Binary?.Length);
+                            if (message.Binary != null)
+                            {
+                                ws.Send(message.Binary);
+                            }
+                            else if (message.Text != null)
+                            {
+                                Console.WriteLine(message.Text);
+                                ws.Send(message.Text);
+                            }
+                            //Console.WriteLine("END <--------");
                         });
+                    });
                     }
                 catch (Exception ex)
                 {
@@ -81,7 +84,7 @@ namespace PlayWrightWs
 
 
             await Page.GetByRole(AriaRole.Button, new() { Name = "Create Transaction" }).ClickAsync();
-            await Page.GetByRole(AriaRole.Cell, new() { Name = "No Account" }).GetByRole(AriaRole.Combobox).SelectOptionAsync(new[] { "1b136143-eb38-480f-995a-4f33965fef16" });
+            await Page.GetByRole(AriaRole.Cell, new() { Name = "No Account" }).GetByRole(AriaRole.Combobox).SelectOptionAsync(new[] { "08dd08b9-eb51-4cdb-8bac-90daab2dd63d" });
             await Page.GetByRole(AriaRole.Spinbutton).First.ClickAsync();
             await Page.GetByRole(AriaRole.Spinbutton).First.FillAsync("10");
             await Page.GetByRole(AriaRole.Cell, new() { Name = "No Selection " }).GetByRole(AriaRole.Spinbutton).ClickAsync();
