@@ -1,0 +1,23 @@
+services:     
+  mariadb:
+    image: mariadb
+    container_name: openbudgeteer-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - 3306:3306
+    volumes:
+      - openbudgeteer-data:/var/lib/mysql
+
+      
+  # optional    
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: openbudgeteer-phpmyadmin
+    links:
+      - mariadb:db
+    ports:
+      - 8081:80
+        
+volumes:
+  openbudgeteer-data:
