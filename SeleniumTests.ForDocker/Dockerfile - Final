@@ -1,0 +1,42 @@
+# Use the .NET 8.0 SDK image as the base
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends gnupg wget curl unzip && \
+    wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - && \
+    echo "deb http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google.list && \
+    apt-get update -y && \
+    apt-get install -y --no-install-recommends google-chrome-stable && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /var/cache/apt/*
+	
+# Set the working directory inside the container
+WORKDIR /app
+
+# Copy the entire project and build it
+#COPY *.sln .
+#COPY SeleniumTests.ForDocker/*.csproj ./SeleniumTests.ForDocker/
+#RUN dotnet restore
+
+COPY . .
+
+RUN dotnet restore
+RUN dotnet build -c Release --no-restore
+
+ENV PATH="$PATH:/app/SeleniumTests.ForDocker/bin/Release/net8.0"
+#ENV PATH="$PATH:/app/chromedriver-linux64"
+
+# Run the tests using NUnit
+#RUN dotnet test --no-build --logger "console;verbosity=detailed"
+#ENTRYPOINT ["dotnet", "test", "-c Release", "--no-build", "--logger \"console;verbosity=detailed\""]
+#ENTRYPOINT ["dotnet", "test", "--configuration", "Release", "--no-build", "--logger", "console;verbosity=detailed"]
+#ENTRYPOINT ["dotnet", "test", "--configuration", "Release", "--no-build", "--logger", "console;verbosity=detailed"]
+ENTRYPOINT ["dotnet", "test", "--configuration", "Release", "--no-build", "--logger", "trx;LogFilePrefix=ForDocker"]
+
+
+
+# docker build -t selenium-nunit-tests2 .
+# docker build -t selenium-nunit-tests2 --no-cache .
+# docker run --rm -v bin:/app/SeleniumTests.ForDocker/bin/Release/net8.0 selenium-nunit-tests2
+
+# docker run --rm -it -v ${PWD}/screenshots:/app/SeleniumTests.ForDocker/bin/Release/net8.0/screenshots -v ${PWD}/testresults:/app/SeleniumTests.ForDocker/TestResults selenium-nunit-tests2

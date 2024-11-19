@@ -34,6 +34,21 @@ namespace SeleniumTests.RevizelyAdmin
 
             Assert.That(_driver.FindElements(By.LinkText("HP LP3065")).Count, Is.GreaterThan(0));
         }
+        
+        [Test]
+        public void SearchTestFail()
+        {
+            _driver.Navigate().GoToUrl("https://ecommerce-playground.lambdatest.io");
+            var searchBox = _driver.FindElement(By.Name("search"));
+            searchBox.SendKeys("hp");
+            searchBox.Submit();
+
+            var productsSelector = By.CssSelector(".product-thumb");
+            var wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(5));
+            wait.Until(drv => drv.FindElements(productsSelector));
+
+            Assert.That(_driver.FindElements(By.LinkText("NOT EXISTING PRODUCT")).Count, Is.GreaterThan(0));
+        }
 
         [TearDown]
         public void TearDown()

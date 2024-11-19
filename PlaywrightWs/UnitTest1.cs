@@ -80,16 +80,16 @@ namespace PlayWrightWs
             await Page.GetByRole(AriaRole.Button, new() { Name = "Create Transaction" }).ClickAsync();
             await Page.GetByRole(AriaRole.Cell, new() { Name = "No Account" }).GetByRole(AriaRole.Combobox).SelectOptionAsync(new[] { "08dd08b9-eb51-4cdb-8bac-90daab2dd63d" });
             await Page.GetByRole(AriaRole.Spinbutton).First.ClickAsync();
-            await Page.GetByRole(AriaRole.Spinbutton).First.FillAsync("10");
+            await Page.GetByRole(AriaRole.Spinbutton).First.FillAsync("987");
             await Page.GetByRole(AriaRole.Cell, new() { Name = "No Selection " }).GetByRole(AriaRole.Spinbutton).ClickAsync();
-            await Page.GetByRole(AriaRole.Cell, new() { Name = "No Selection  Remaining" }).GetByRole(AriaRole.Spinbutton).FillAsync("10");
+            await Page.GetByRole(AriaRole.Cell, new() { Name = "No Selection  Remaining" }).GetByRole(AriaRole.Spinbutton).FillAsync("987");
             await Page.GetByRole(AriaRole.Button, new() { Name = "" }).ClickAsync();
-            await Assertions.Expect(Page.GetByRole(AriaRole.Cell, new() { Name = "$10.00" }).Nth(2)).ToBeVisibleAsync();
+            await Assertions.Expect(Page.GetByRole(AriaRole.Cell, new() { Name = "$987.00" }).Nth(2)).ToBeVisibleAsync();
 
         }
 
         [Test]
-        public async Task GetStartedLink()
+        public async Task EchoWebsocketOrg()
         {
             await Page.RouteWebSocketAsync(new Regex(".*"), ws =>
             {
@@ -107,10 +107,10 @@ namespace PlayWrightWs
                         {
                             server.Send(message.Binary);
                         }
-                        else if (message.Text != null)
-                        {
-                            server.Send(message.Text);
-                        }
+                        //else if (message.Text != null)
+                        //{
+                        //    server.Send(message.Text);
+                        //}
 
                         server.OnMessage(message =>
                         {
@@ -121,16 +121,19 @@ namespace PlayWrightWs
                             {
                                 ws.Send(message.Binary);
                             }
-                            else if (message.Text != null)
-                            {
-                                Console.WriteLine(message.Text);
-                                ws.Send(message.Text);
-                            }
+                            //else if (message.Text != null)
+                            //{
+                            //    Console.WriteLine(message.Text);
+                            //    ws.Send(message.Text);
+                            //}
                         });
                     });
                 });
             });
             await Page.GotoAsync("https://echo.websocket.org/.ws");
+            await Page.WaitForTimeoutAsync(3000);
+            await Page.Locator("#content").FillAsync("test message");
+            await Page.Locator("#send").ClickAsync();
 
             // Click the get started link.
             await Page.GetByRole(AriaRole.Link, new() { Name = "Get started" }).ClickAsync();
