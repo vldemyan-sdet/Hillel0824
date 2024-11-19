@@ -27,7 +27,7 @@ namespace PlayWrightWs
             });
 
             Page = await context.NewPageAsync();
-            Page.SetDefaultTimeout(5000);
+            Page.SetDefaultTimeout(10000);
         }
 
         [TearDown]

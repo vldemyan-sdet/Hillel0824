@@ -1,6 +1,5 @@
 ﻿using System.Text.RegularExpressions;
 using Microsoft.Playwright;
-using Microsoft.VisualStudio.TestPlatform.CommunicationUtilities;
 
 namespace PlayWrightWs
 {
@@ -35,8 +34,8 @@ namespace PlayWrightWs
                     ws.OnMessage(message =>
                     {
                         Console.WriteLine("OnMessage -->" + ws.Url);
-                        //Console.WriteLine(message.Text);
-                        //Console.WriteLine(message.Binary?.Length);
+                        Console.WriteLine(message.Text);
+                        Console.WriteLine(message.Binary?.Length);
                         if (message.Binary != null)
                         {
                             server.Send(message.Binary);
@@ -46,13 +45,12 @@ namespace PlayWrightWs
                             Console.WriteLine(message.Text);
                             server.Send(message.Text);
                         }
-                        //Console.WriteLine("END -------->");
 
                         server.OnMessage(message =>
                         {
                             Console.WriteLine("OnMessage <--" + ws.Url);
-                            //Console.WriteLine(message.Text);
-                            //Console.WriteLine(message.Binary?.Length);
+                            Console.WriteLine(message.Text);
+                            Console.WriteLine(message.Binary?.Length);
                             if (message.Binary != null)
                             {
                                 ws.Send(message.Binary);
@@ -62,7 +60,7 @@ namespace PlayWrightWs
                                 Console.WriteLine(message.Text);
                                 ws.Send(message.Text);
                             }
-                            //Console.WriteLine("END <--------");
+
                         });
                     });
                     }
@@ -79,10 +77,6 @@ namespace PlayWrightWs
             await Page.WaitForLoadStateAsync(LoadState.NetworkIdle);
             await Page.WaitForLoadStateAsync(LoadState.DOMContentLoaded);
 
-                 
-
-
-
             await Page.GetByRole(AriaRole.Button, new() { Name = "Create Transaction" }).ClickAsync();
             await Page.GetByRole(AriaRole.Cell, new() { Name = "No Account" }).GetByRole(AriaRole.Combobox).SelectOptionAsync(new[] { "08dd08b9-eb51-4cdb-8bac-90daab2dd63d" });
             await Page.GetByRole(AriaRole.Spinbutton).First.ClickAsync();
@@ -92,9 +86,6 @@ namespace PlayWrightWs
             await Page.GetByRole(AriaRole.Button, new() { Name = "" }).ClickAsync();
             await Assertions.Expect(Page.GetByRole(AriaRole.Cell, new() { Name = "$10.00" }).Nth(2)).ToBeVisibleAsync();
 
-
-            // Expect a title "to contain" a substring.
-            //await Assertions.Expect(Page).ToHaveTitleAsync(new Regex("Playwright"));
         }
 
         [Test]
@@ -106,13 +97,36 @@ namespace PlayWrightWs
                 Console.WriteLine(ws.Url);
                 ws.OnMessage(message =>
                 {
-                    Console.WriteLine("--------------------------");
-                    Console.WriteLine(message.Text);
-                    Console.WriteLine(message.Binary);
                     var server = ws.ConnectToServer();
-                    ws.OnMessage(message => {
+                    ws.OnMessage(message =>
+                    {
+                        Console.WriteLine("OnMessage -->" + ws.Url);
                         Console.WriteLine(message.Text);
-                        server.Send(message.Binary);
+                        Console.WriteLine(message.Binary?.Length);
+                        if (message.Binary != null)
+                        {
+                            server.Send(message.Binary);
+                        }
+                        else if (message.Text != null)
+                        {
+                            server.Send(message.Text);
+                        }
+
+                        server.OnMessage(message =>
+                        {
+                            Console.WriteLine("OnMessage <--" + ws.Url);
+                            Console.WriteLine(message.Text);
+                            Console.WriteLine(message.Binary?.Length);
+                            if (message.Binary != null)
+                            {
+                                ws.Send(message.Binary);
+                            }
+                            else if (message.Text != null)
+                            {
+                                Console.WriteLine(message.Text);
+                                ws.Send(message.Text);
+                            }
+                        });
                     });
                 });
             });
